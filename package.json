@@ -1,0 +1,9 @@
+{
+  "name": "school-erp-demo",
+  "version": "1.0.0",
+  "description": "School Management ERP demo: static frontend + tiny dependency-free Node server",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" },
+  "license": "UNLICENSED"
+}
