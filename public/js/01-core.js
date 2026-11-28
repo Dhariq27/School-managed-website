@@ -1,5 +1,5 @@
 const K = 'school_erp_demo_v1', $ = s => document.querySelector(s), esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const SCH = { name: '[Eduspark School]', motto: '[YOUR SCHOOL MOTTO]', loc: '[YOUR SCHOOL LOCATION]', contact: '[YOUR CONTACT DETAILS]', year: '2026–27' };
+const SCH = { name: 'Eduspark School', motto: '[YOUR SCHOOL MOTTO]', loc: '[YOUR SCHOOL LOCATION]', contact: '[YOUR CONTACT DETAILS]', year: '2026–27' };
 const EXT = ['First Unit Test', 'Quarterly Examination', 'Half-Yearly Examination', 'Second Unit Test', 'Pre-Final Examination', 'Public Examination', 'Annual Examination'];
 const dd = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10) }, today = () => dd(0);
 /* ---------- illustrations (inline SVG, since hosted pages cannot load outside photos) ---------- */
