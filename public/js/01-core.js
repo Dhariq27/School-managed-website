@@ -1,5 +1,5 @@
 const K = 'school_erp_demo_v1', $ = s => document.querySelector(s), esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const SCH = { name: 'EDUSPARK SCHOOL', motto: '[EDUSPARK SCHOOL MOTTO]', loc: '[YOUR SCHOOL LOCATION]', contact: '[YOUR CONTACT DETAILS]', year: '2026–27' };
+const SCH = { name: 'EDUSPARK SCHOOL', motto: '[EDUSPARK SCHOOL MOTTO]', loc: 'CHENNAI', contact: '8712230000', year: '2026–27' };
 const EXT = ['First Unit Test', 'Quarterly Examination', 'Half-Yearly Examination', 'Second Unit Test', 'Pre-Final Examination', 'Public Examination', 'Annual Examination'];
 const dd = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10) }, today = () => dd(0);
 /* ---------- illustrations (inline SVG, since hosted pages cannot load outside photos) ---------- */
@@ -73,7 +73,7 @@ function draw() {
     const h = location.hash.slice(2) || 'home', r = $('#root');
     if (h.startsWith('app')) {
         if (!S.session) return go('login'); const rl = me().role, pg = h.split('/')[1] || 'dash', nv = NAV[rl]; if (!nv.some(n => n[0] == pg)) return go('app/dash'); const fn = PG[rl + '_' + pg] || PG[pg];
-        r.innerHTML = `<div class="app"><aside class="sb" id="sb"><div class="br"><div class="lg">S</div>${esc(SCH.name)}</div>${nv.map(n => `<a href="#/app/${n[0]}" class="${n[0] == pg ? 'on' : ''}">${n[1]}</a>`).join('')}</aside><div class="mn"><div class="tp"><button class="btn gh sm" id="burger" onclick="$('#sb').classList.toggle('open')">Menu</button><h2>${nv.find(n => n[0] == pg)[1]}</h2><a href="#" class="bell btn gh sm" onclick="A.bell();return false">Alerts<b>${unread()}</b></a><span class="bd">${rl}</span><button class="btn sm" onclick="A.logout()">Logout</button></div><div class="ct keep">${fn()}</div></div></div>`
+        r.innerHTML = `<div class="app"><aside class="sb" id="sb"><div class="br"><div class="lg">S</div>${esc(SCH.name)}<button type="button" class="sb-x" aria-label="Close menu" onclick="$('#sb').classList.remove('open')">✕</button></div>${nv.map(n => `<a href="#/app/${n[0]}" class="${n[0] == pg ? 'on' : ''}">${n[1]}</a>`).join('')}</aside><div class="sb-bk" onclick="$('#sb').classList.remove('open')"></div><div class="mn"><div class="tp"><button class="btn gh sm" id="burger" onclick="$('#sb').classList.toggle('open')">Menu</button><h2>${nv.find(n => n[0] == pg)[1]}</h2><a href="#" class="bell btn gh sm" onclick="A.bell();return false">Alerts<b>${unread()}</b></a><span class="bd">${rl}</span><button class="btn sm" onclick="A.logout()">Logout</button></div><div class="ct keep">${fn()}</div></div></div>`
     }
     else if (h == 'login') loginPg(); else pubPg()
 }
