@@ -1,6 +1,14 @@
 /* ===== v5: dynamic landing page management (events, notices) – all content comes from saved data ===== */
 function migrateWeb(){
  if(!S.events)S.events=ACT.map((a,i)=>({id:'ev'+(i+1),name:a[1],desc:a[2],date:'',time:'',loc:'',img:/^(data:|https?:)/.test(S.photos[a[0]]||'')?S.photos[a[0]]:(a[4]||''),kind:a[3],pub:!S.actOff[a[0]]}));
+ if(!S._landingImgV1){
+  const rm=new Set(['ev4','ev5','ev6','ev7']),rmN=new Set(['Cultural Programmes','Classroom Activities','Educational Trips','Student Achievements']);
+  const evMap={ev1:'images/event-sports-day.jpg',ev2:'images/event-annual-day.jpg',ev3:'images/event-science-exhibition.jpg'};
+  S.events=S.events.filter(e=>!(rm.has(e.id)&&rmN.has(e.name)));
+  S.events.forEach(e=>{if(evMap[e.id]&&(!e.img||e.img.startsWith('data:')))e.img=evMap[e.id]});
+  S.pics={};
+  S._landingImgV1=true;
+ }
  if(!S.notices){S.notices=S.ann.filter(a=>a.pub).map(a=>({id:'pn'+a.id,title:a.title,desc:a.body||'',cat:'General Announcement',date:a.date,pub:true,att:null,cls:[...new Set((a.pubCls||[]).map(k=>splitC(k).b))]}));S.ann.forEach(a=>{if(a.pub)a.pub=false})}
  S.photos={};S.pics=S.pics||{};save()}
 const NCAT=['General Announcement','Public Notice','Admission Announcement','Examination Notice','Holiday Announcement','Important Update','Other'],NIMP=['Important Update','Examination Notice'];
